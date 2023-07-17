@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomePage from "@/views/HomePage.vue";
 import RecipePage from "@/views/RecipePage.vue";
 import recipes from "@/assets/data/recipes.js";
+import CreateRecipe from "@/components/recipe/CreateRecipe.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -13,7 +14,12 @@ const router = createRouter({
       props: route => ({
         recipe: recipes.find(recipe => recipe.id === Number(route.params.id))
       })
+    },
+    {
+      path: "/recipe/add",
+      component: CreateRecipe
     }
+
   ]
 });
 

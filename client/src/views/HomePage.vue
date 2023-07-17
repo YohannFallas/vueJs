@@ -11,7 +11,7 @@ import { defineComponent } from "vue";
 import TitleComponent from "@/components/TitleComponent.vue";
 import RecipeListComponent from "@/components/recipe/RecipeListComponent.vue";
 
-import recipes from "@/assets/data/recipes";
+
 
 export default defineComponent({
     name: "HomePage",
@@ -21,8 +21,20 @@ export default defineComponent({
     },
     data() {
         return {
-            recipes
+            recipes: [],
+            test: this.loggedIn,
         };
+    },
+    computed: {
+        loggedIn() {
+            return this.$store.getters.getIsLoading
+        },
+        getAllRecipe() {
+            return this.$store.getters.getAllRecipes
+        }
+    },
+    created() {
+        this.recipes = this.getAllRecipe
     }
 });
 </script>

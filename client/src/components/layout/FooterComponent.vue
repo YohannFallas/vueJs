@@ -5,15 +5,15 @@
                 <li>
                     <router-link class="menu-link" to="/">Liste des recettes</router-link>
                 </li>
-                <template v-if="!isLoggedIn">
+                <!-- <template v-if="!isLoggedIn">
                     <li>
                         <router-link class="menu-link" to="/registration">Inscription</router-link>
                     </li>
                     <li>
                         <router-link class="menu-link" to="/login">Connexion</router-link>
                     </li>
-                </template>
-                <li v-else>
+                </template> -->
+                <li>
                     <router-link class="menu-link" to="/recipe/add">Créer une recette</router-link>
                 </li>
             </ul>

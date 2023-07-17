@@ -3,9 +3,9 @@
 </template>
   
 <script>
-import { defineComponent } from "vue";
 
-export default defineComponent({
+
+export default {
     name: "TitleComponent",
     props: {
         title: {
@@ -13,7 +13,7 @@ export default defineComponent({
             required: true
         }
     }
-});
+};
 </script>
   
 <style scoped>
