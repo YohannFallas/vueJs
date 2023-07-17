@@ -7,6 +7,8 @@
   
 <script>
 import { defineComponent } from "vue";
+import { useRecipeStore } from '@/store/'
+import { mapState, mapActions } from 'pinia'
 
 import TitleComponent from "@/components/TitleComponent.vue";
 import RecipeListComponent from "@/components/recipe/RecipeListComponent.vue";
@@ -19,22 +21,14 @@ export default defineComponent({
         TitleComponent,
         RecipeListComponent
     },
-    data() {
-        return {
-            recipes: [],
-            test: this.loggedIn,
-        };
-    },
     computed: {
-        loggedIn() {
-            return this.$store.getters.getIsLoading
-        },
-        getAllRecipe() {
-            return this.$store.getters.getAllRecipes
-        }
+        ...mapState(useRecipeStore, ["recipes"])
     },
     created() {
-        this.recipes = this.getAllRecipe
+        this.getOnlineRecipes();
+    },
+    methods: {
+        ...mapActions(useRecipeStore, ["getOnlineRecipes"])
     }
 });
 </script>

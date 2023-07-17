@@ -26,9 +26,6 @@
             </div>
             <input class="submit" type="submit" value="Sauvegarder" />
 
-
-
-
         </form>
     </div>
 </template>

@@ -1,33 +1,16 @@
-import { createStore } from 'vuex'
+import { defineStore } from 'pinia'
+import axios from 'axios';
 
-import recipes from "@/assets/data/recipes";
 
-export default createStore({
-  state: {
-    isLoggedIn: true,
-    recipes: [...recipes]
-  },
-  getters: {
-    getIsLoading(state) {
-      return state.isLoggedIn
-    },
-    getAllRecipes(state) {
-      return state.recipes
-    },
-    getRecipeById(state, id) {
-      return state.recipes.find(recipe => recipe.id === Number(id))
-    }
-  },
-  mutations: {
-    newRecipeMutation(state, newRecipe) {
-      state.recipes.push(newRecipe);
-    }
-  },
+
+export const useRecipeStore = defineStore("recipe", {
+  state: () => ({
+    recipes: []
+  }),
   actions: {
-    newRecipeAction(store, newRecipe) {
-      store.commit('newRecipeMutation', newRecipe)
+    async getOnlineRecipes() {
+      const requeteRecipes = await axios.get(' http://guillaumepons63-server.eddi.cloud:8090/recipes');
+      this.recipes = requeteRecipes.data;
     }
-  },
-  modules: {
   }
 })
