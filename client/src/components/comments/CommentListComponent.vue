@@ -1,16 +1,20 @@
 <template>
     <div>
-        <!-- Contenu du composant ici -->
-        <!-- Ci-dessous, contenu pour tester le composant -->
-        <p>CommentListComponent</p>
+        <CommentComponent />
+
     </div>
 </template>
   
 <script>
 import { defineComponent } from "vue";
 
+import CommentComponent from './CommentComponent.vue'
+
 export default defineComponent({
-    name: "CommentListComponent"
+    name: "CommentListComponent",
+    components: {
+        CommentComponent
+    }
 });
 </script>
   

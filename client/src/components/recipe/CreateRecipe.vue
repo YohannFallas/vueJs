@@ -15,15 +15,18 @@
                 <input class="input" type="text" name="duration" id="duration" placeholder="10 minutes"
                     v-model="duration" />
             </div>
-
             <div>
-                <label class="label" for="cost">Coût par personne</label>
-                <input class="input" type="text" name="cost" id="cost" placeholder="1€" v-model="cost" />
-                <div>
-                    <label class="label" for="recipe">Recette</label>
-                    <p><textarea name="recipe" id="recipe" rows="10" v-model="recipe"></textarea></p>
-                </div>
+                <label class="label" for="ingredient"> Ingredients </label>
+                <input class="input" type="text" name="duration" id="ingredient" v-model="ingredient" />
             </div>
+
+            <!-- <div> -->
+            <!-- <label class="label" for="cost">Coût par personne</label>
+                <input class="input" type="text" name="cost" id="cost" placeholder="1€" v-model="cost" />
+                <div> -->
+            <label class="label" for="recipe">Recette</label>
+            <p><textarea name="recipe" id="recipe" rows="10" v-model="recipe"></textarea></p>
+
             <input class="submit" type="submit" value="Sauvegarder" />
 
         </form>
@@ -33,6 +36,9 @@
 <script>
 import TitleComponent from '@/components/TitleComponent.vue'
 
+import { useRecipeStore } from '@/store';
+
+
 
 export default {
     name: "CreateRecipe",
@@ -40,26 +46,30 @@ export default {
         return {
             title: String(),
             duration: String(),
-            cost: String(),
-            recipe: String()
+            // cost: String(),
+            recipe: String(),
+            ingredient: String()
         }
     },
     components: { TitleComponent },
     methods: {
-        saveRecipe() {
-            const recipe = {
-                id: Math.floor(Math.random() + Date.now()),
+        async saveRecipe() {
+            const recipeData = {
                 name: this.name,
-                duration: this.duration,
-                cost: this.cost,
-                recipe: this.recipe
+                description: this.recipe,
+                // cost: this.cost,
+                ingredients: this.ingredient,
+                user_id: 1
             }
-            this.$store.dispatch('newRecipeAction', recipe)
+            const requete = await useRecipeStore().setRecipe(recipeData)
+            this.$router.push(`/recipes/${requete.id}`)
+
 
         }
     }
 
 }
+
 
 
 </script>

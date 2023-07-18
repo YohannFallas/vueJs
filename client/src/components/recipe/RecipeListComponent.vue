@@ -1,13 +1,15 @@
 <template>
-    <RecipeComponent v-for="recipe in recipes" :key="recipe.id" :recipe="recipe" />
+    <PaginationComponent :data="recipes" :itemsPerPage="4" />
 </template>
   
 <script>
-import RecipeComponent from "@/components/recipe/RecipeComponent.vue";
+
+import PaginationComponent from "./PaginationComponent.vue"
+
 export default {
     name: "RecipeListComponent",
     components: {
-        RecipeComponent
+        PaginationComponent
     },
     props: {
         recipes: {

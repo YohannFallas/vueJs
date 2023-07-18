@@ -23,9 +23,17 @@ export default defineComponent({
     },
     computed: {
         ...mapState(useRecipeStore, ["recipes"])
+
+        // Pour utiliser Pinia sans les objets map
+        // recipes() {
+        //     const store = useRecipeStore()
+        //     return store.recipes;
+        // }
+
     },
     created() {
         this.getOnlineRecipes();
+
     },
     methods: {
         ...mapActions(useRecipeStore, ["getOnlineRecipes"])

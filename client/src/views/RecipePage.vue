@@ -6,24 +6,30 @@
             <img :src="`../../src/assets/images/${recipe.imgSrc}`" :alt="recipe.name" />
         </figure>
         <p>{{ recipe.description }}</p>
+        <CommentListComponent />
     </div>
 </template>
   
 <script>
 import { defineComponent } from "vue";
+import { useRecipeStore } from "@/store";
 
-import TitleComponent from "@/components/TitleComponent.vue";
+import TitleComponent from "../components/TitleComponent.vue";
+import CommentListComponent from "@/components/comments/CommentListComponent.vue"
 
 export default defineComponent({
     name: "RecipePage",
     components: {
-        TitleComponent
+        TitleComponent, 
+        CommentListComponent
     },
-    props: {
-        recipe: {
-            type: Object,
-            required: true
+    data() {
+        return {
+            recipe: {}
         }
+    },
+    async created() {
+        this.recipe = await useRecipeStore().getRecipe(this.$route.params.id);
     }
 });
 </script>
